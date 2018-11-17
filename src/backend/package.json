@@ -1,0 +1,26 @@
+{
+  "name": "@tang415a/onlinetest",
+  "version": "1.0.0",
+  "description": "A web app for JavaScript online test",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tang415a/onlinetest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tang415a/onlinetest/issues"
+  },
+  "homepage": "https://github.com/tang415a/onlinetest#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "nodemailer": "^4.6.8",
+    "path": "^0.12.7"
+  }
+}
