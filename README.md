@@ -1,7 +1,7 @@
 # onlinetest
 An online JavaScript test app
 
-This app is an html5 based web app that can establish and conduct online test sessions for users. Currently a JavaScript language bank has been created and the app will randomly select a certain number (thirty) of single-choice questions to constitute the quiz. The user needs to submit the answer for each question within a certain period of time (two minutes). In the end, a report including the score and cost time will be automatically generated on the server side. The user can start the test session after login or by visiting a generated URL which was included in the request sent to his/her email box.
+This app is an html5 based web app that can establish and conduct online test sessions for users. Currently a JavaScript language bank has been created and the app will randomly select a certain number (thirty) of single-choice questions to constitute the quiz. The user needs to submit the answer for each question within a certain period of time (two minutes). In the end, a report including the score and cost time will be generated on the server side. The user can start the test session by either signing up or visiting a URL included in the request sent to his/her email box in advance.
 
 Most of the quiz came from JavaScript interview repositories on Github, including:
 1. 123-JavaScript-Interview-Questions (https://github.com/ganqqwerty/123-Essential-JavaScript-Interview);
@@ -23,7 +23,7 @@ Bootstrap library was used in frontend development and the responsive design was
 1. http://localhost:3000/signup
     The user can sign up with his/her profile (name & email address) and start the session immediately.
 2. http://localhost:3000
-    The administrator can sign up for a user and send the request to his/her email box automatically. To do that, you need to provide the email service (the user account for outbox) to nodemailer at Ln. 56 to Ln. 66 in `src/backend/src/server.js`.
+    The administrator can sign up for a user and send the request to his/her email box automatically. To do that, you need to provide the email service (including the user account credential for outbox) to nodemailer at Ln. 56 to Ln. 66 in `src/backend/src/server.js`.
 
 ## Snapshots
 1. Sign up
