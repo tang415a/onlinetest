@@ -10,7 +10,7 @@ Most of the quiz came from JavaScript interview repositories on Github, includin
 
 Bootstrap library was used in frontend development and the responsive design was enabled. The backend for this app was written in Node.js. An installation of the latest security patch of Node (8.12.x or higher) is recommended.
 
-## How to Run on Localhost
+## Run on Localhost
 1. Install dependencies for backend: 
     * `cd src/backend/`
     * `npm install`
