@@ -5,6 +5,8 @@ const fs = require("fs");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 
+const svgCaptcha = require("svg-captcha");
+
 const {quiz, formatQuiz, genQuiz} = require('./quiz');
 const {checkDir, backup, restore, output} = require('./util');
 const mail = require('./mail');
@@ -36,8 +38,21 @@ app.get("/signup", (_req, res) => {
   res.sendFile(path.resolve(__dirname, "../../", "./frontend/signup.html"));
 });
 
+let captcha_text;
+app.get('/captcha', function (req, res) {
+  let captcha = svgCaptcha.create();
+  captcha_text = captcha.text;
+  
+  res.type('svg');
+  res.status(200).send(captcha.data);
+});
+
 router.route('/admin')
   .post(function(req, res){
+    let captcha = req.body.captcha || "";
+    if (captcha !== captcha_text)
+      return res.redirect("/");
+    
     let name = req.body.name || "Anonymous";
     name = name.replace(/[^A-Za-z0-9 ]/g, '');
     if (name.length > 20 || name.length <= 0)

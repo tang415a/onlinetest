@@ -83,3 +83,14 @@ h4 {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+
+.row {
+  display: table;
+}
+
+.row [class*="col-"] {
+  float: none;
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 0px;
+}
