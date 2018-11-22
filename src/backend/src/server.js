@@ -119,7 +119,7 @@ router.route('/quiz')
     return res.redirect(`/quiz/${session_id}`);
   });
 
-const Question_Count = 3;
+const Question_Count = 30;
 router.route('/quiz/:session_id')
   .get(function(req, res){
     let session_id = req.params.session_id;
