@@ -5,20 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/JavaScript" src="/scripts/jquery.min.js"></script>
   </head>
   <body oncontextmenu="return false;">
     <div class="scp-quizzes-data container">
       <form class="mt-5" action="/quiz">
         <div class="form-group">
-            <h3>Sign Up</h3>      
-            <label for="name">Name</label>
-            <input type="text" name="name" maxlength="30" class="form-control form-control-lg" oninput = "value=value.replace(/[^A-Za-z0-9 ]/g, '')" required>
-            <label for="mail">Email</label>
-            <input type="email" name="mail" maxlength="50" class="form-control form-control-lg" required>
+          <h3>Sign Up</h3>      
+          <label for="name">Name</label>
+          <input type="text" name="name" maxlength="30" class="form-control form-control-lg" oninput = "value=value.replace(/[^A-Za-z0-9 ]/g, '')" required>
+          <label for="mail">Email</label>
+          <input type="email" name="mail" maxlength="50" class="form-control form-control-lg" required>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-6">
+                <input type="text" class="form-control form-control-lg" name="captcha" maxlength="4" required>
+              </div>
+              <div class="col-xs-6">
+                <div id="captcha-filler" onclick="handler()"></div>  
+              </div> 
+            </div>
+          </div>
         </div>
         
         <input type="submit" class="btn btn-primary" value="Submit">
       </form>
     </div>
+    <script type="text/JavaScript">
+      function handler() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("captcha-filler").innerHTML = xhttp.responseText;
+          }
+        };
+        xhttp.open("GET", "/captcha/", false);
+        xhttp.send();
+      }
+      $(document).ready(function(){
+        handler();
+      });
+    </script>
   </body>
 </html>

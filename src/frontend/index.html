@@ -16,14 +16,13 @@
           <input type="text" name="name" maxlength="30" class="form-control form-control-lg" oninput = "value=value.replace(/[^A-Za-z0-9 ]/g, '')" required>
           <label for="mail">Email</label>
           <input type="email" name="mail" maxlength="50" class="form-control form-control-lg" required><br>
-          <label for="verification">Verification</label>
           <div class="container">
             <div class="row">
               <div class="col-xs-6">
                 <input type="text" class="form-control form-control-lg" name="captcha" maxlength="4" required>
               </div>
               <div class="col-xs-6">
-                <div id="captcha-filler"></div>  
+                <div id="captcha-filler" onclick="handler()"></div>  
               </div> 
             </div>
           </div>                    
@@ -33,16 +32,18 @@
       </form>
     </div>
     <script type="text/JavaScript">
-      $(document).ready(function(){
+      function handler() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-            // Typical action to be performed when the document is ready:
             document.getElementById("captcha-filler").innerHTML = xhttp.responseText;
           }
         };
         xhttp.open("GET", "/captcha/", false);
         xhttp.send();
+      }
+      $(document).ready(function(){
+        handler();
       });
     </script>
   </body>

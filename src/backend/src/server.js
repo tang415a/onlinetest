@@ -101,6 +101,9 @@ router.route('/admin')
 let test = restore();
 router.route('/quiz')
   .get(function(req, res){
+    let captcha = req.query.captcha || "";
+    if (captcha !== captcha_text)
+      return res.redirect("/signup");
     let name = req.query.name || "Anonymous";
     name = name.replace(/[^A-Za-z0-9]/g, '');
     if (name.length > 30 || name.length <= 0)
