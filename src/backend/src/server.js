@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 
 const svgCaptcha = require("svg-captcha");
-const session = require('express-session');
+const session = require("express-session");
 
 const {quiz, formatQuiz, genQuiz} = require('./quiz');
 const {checkDir, backup, restore, output} = require('./util');
@@ -19,7 +19,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(session({
-  secret: 'keyboardcat',
+  secret: "keyboardcat",
   resave: true,
   saveUninitialized: true
 }));
