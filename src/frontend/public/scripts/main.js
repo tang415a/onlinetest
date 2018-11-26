@@ -102,12 +102,12 @@
     if (timer < 0) {
       timer = setInterval(function () {
         let res = convertMilliseconds(total);
-        document.getElementById("counterdown").innerText = res.minutes + ":" + res.seconds;//`${res.minutes}:${res.seconds}`;
+        document.getElementById("counterdown").innerText = res.minutes + ":" + res.seconds;
         if ( 0 >= total ){
           next();
         }
-        total-=1000;
-      }, 1000 );
+        total -= 1000;
+      }, 1000);
     }
   }
 
