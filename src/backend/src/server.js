@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 
 const svgCaptcha = require("svg-captcha");
+const session = require('express-session');
 
 const {quiz, formatQuiz, genQuiz} = require('./quiz');
 const {checkDir, backup, restore, output} = require('./util');
@@ -17,6 +18,11 @@ checkDir();
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
+app.use(session({
+  secret: 'keyboardcat',
+  resave: true,
+  saveUninitialized: true
+}));
 
 let router = express.Router();
 //CORS middleware
@@ -38,11 +44,9 @@ app.get("/signup", (_req, res) => {
   res.sendFile(path.resolve(__dirname, "../../", "./frontend/signup.html"));
 });
 
-let captcha_text;
 app.get('/captcha', function (req, res) {
   let captcha = svgCaptcha.create();
-  captcha_text = captcha.text;
-  
+  req.session.captcha = captcha.text;
   res.type('svg');
   res.status(200).send(captcha.data);
 });
@@ -50,7 +54,7 @@ app.get('/captcha', function (req, res) {
 router.route('/admin')
   .post(function(req, res){
     let captcha = req.body.captcha || "";
-    if (captcha !== captcha_text)
+    if (captcha !== req.session.captcha)
       return res.redirect("/");
     
     let name = req.body.name || "Anonymous";
@@ -80,7 +84,7 @@ router.route('/admin')
     let mailOptions = {
       from: 'XXX@163.com',
       to: req.body.mail,
-      subject: 'Your test session for Bentley Systems',
+      subject: 'Your test session for XXXXXX Company',
       html: body
     };
     
@@ -102,7 +106,7 @@ let test = restore();
 router.route('/quiz')
   .get(function(req, res){
     let captcha = req.query.captcha || "";
-    if (captcha !== captcha_text)
+    if (captcha !== req.session.captcha)
       return res.redirect("/signup");
     let name = req.query.name || "Anonymous";
     name = name.replace(/[^A-Za-z0-9]/g, '');

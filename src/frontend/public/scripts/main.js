@@ -28,7 +28,7 @@
   function getQuestion(){
     ans = {};
     let get = new XMLHttpRequest();
-    get.onreadystatechange = function() {
+    get.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200) {                                                                                                                                                                                                                         
         try {
           let res = JSON.parse(this.responseText);
@@ -74,7 +74,7 @@
     get.send();
   }
 
-  function convertMilliseconds(ms) {
+  function convertMilliseconds(ms){
     let s = Math.floor(ms / 1000),
       m = Math.floor(s / 60),
       pad = function(n) {
@@ -97,15 +97,15 @@
     window.location.reload();
   }
 
-  function initializeClock() {
+  function initializeClock(){
     total = millisecs;
     if (timer < 0) {
-      timer = setInterval(function () {
+      timer = setInterval(function(){
         let res = convertMilliseconds(total);
         document.getElementById("counterdown").innerText = res.minutes + ":" + res.seconds;
-        if ( 0 >= total ){
+        if (0 >= total)
           next();
-        }
+        
         total -= 1000;
       }, 1000);
     }
