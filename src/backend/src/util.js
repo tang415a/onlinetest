@@ -41,16 +41,21 @@ function output(test, session_id, quiz) {
     let idx = rec.qs[i];
     data += `(${i+1}): ${quiz[idx][0]}\r\n\r\n${quiz[idx][1]}\r\n\r\n`;
     let a = rec.ans[i];
-    if ("idx" in rec.ans[i]) {      
-      if (a.idx === quiz[idx][3]) {
-        score++;
-        data += `Ans: ${a.val}\r\nCorret\r\n\r\n`;
+    try{
+      if (rec.ans[i] && "idx" in rec.ans[i]) {      
+        if (a.idx === quiz[idx][3]) {
+          score++;
+          data += `Ans: ${a.val}\r\nCorret\r\n\r\n`;
+        }
+        else
+          data += `Ans: ${a.val}\r\nWrong\r\n\r\n`;
       }
       else
-        data += `Ans: ${a.val}\r\nWrong\r\n\r\n`;
+        data += "Blank\r\n";
     }
-    else
-      data += "Blank\r\n";
+    catch(e){
+      data += "Invalid\r\n";
+    }
     ms += a.t;
   }
 
